@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
 from uuid import uuid4, UUID
 
+
 # Define the ToDo model
 class ToDoItem(BaseModel):
     title: str
@@ -12,6 +13,7 @@ class ToDoItem(BaseModel):
 # In-memory database simulation
 db = {}
 
+
 app = FastAPI()
 
 # POST
@@ -19,11 +21,13 @@ app = FastAPI()
 async def create_todo(todo: ToDoItem):
     todo_id = str(uuid4())
     db[todo_id] = todo
+    print(db)
     return {**todo.dict(), "id": todo_id}
 
 # GET
 @app.get("/todos/", response_model=List[ToDoItem])
 async def read_todos():
+    print(db)
     return [item for item in db.values()]
 
 # GET By Id
