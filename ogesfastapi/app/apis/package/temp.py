@@ -9,3 +9,5 @@ def get_hello_from_country(input_data: dict) -> str:
     except Exception as e:
         print("api.package.temp error:", e)
         return "error"
+
+
